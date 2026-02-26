@@ -13,7 +13,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 
 interface DashboardHeaderProps {
-  variant: "admin" | "user" | "vendor";
+  variant: "admin" | "user" | "vendor" | "delivery";
   onMenuClick: () => void;
   sidebarOpen: boolean;
 }
@@ -22,6 +22,7 @@ const userProfiles = {
   admin: { name: "Admin User", email: "admin@foodapp.com", avatar: "" },
   user: { name: "John Doe", email: "john@example.com", avatar: "" },
   vendor: { name: "Pizza Palace", email: "contact@pizzapalace.com", avatar: "" },
+  delivery: { name: "Rahul S.", email: "rahul@delivery.com", avatar: "" },
 };
 
 export function DashboardHeader({ variant, onMenuClick, sidebarOpen }: DashboardHeaderProps) {

@@ -4,9 +4,15 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
+import { PublicLayout } from "@/components/layout/PublicLayout";
 
-// Landing
-import Index from "./pages/Index";
+// Public Pages
+import Home from "./pages/Home";
+import Auth from "./pages/Auth";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Join from "./pages/Join";
+import OrderTracking from "./pages/OrderTracking";
 import NotFound from "./pages/NotFound";
 
 // Admin Pages
@@ -33,6 +39,14 @@ import VendorAnalytics from "./pages/vendor/VendorAnalytics";
 import VendorReviews from "./pages/vendor/VendorReviews";
 import VendorSettings from "./pages/vendor/VendorSettings";
 
+// Delivery Pages
+import DeliveryDashboard from "./pages/delivery/DeliveryDashboard";
+import DeliveryOrders from "./pages/delivery/DeliveryOrders";
+import DeliveryEarnings from "./pages/delivery/DeliveryEarnings";
+import DeliveryMap from "./pages/delivery/DeliveryMap";
+import DeliveryRatings from "./pages/delivery/DeliveryRatings";
+import DeliverySettings from "./pages/delivery/DeliverySettings";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -42,8 +56,18 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          
+          {/* Public Routes */}
+          <Route element={<PublicLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/join" element={<Join />} />
+          </Route>
+
+          {/* Order Tracking (standalone) */}
+          <Route path="/track/:orderId" element={<OrderTracking />} />
+
           {/* Admin Routes */}
           <Route element={<DashboardLayout variant="admin" />}>
             <Route path="/admin" element={<AdminDashboard />} />
@@ -72,6 +96,16 @@ const App = () => (
             <Route path="/vendor/analytics" element={<VendorAnalytics />} />
             <Route path="/vendor/reviews" element={<VendorReviews />} />
             <Route path="/vendor/settings" element={<VendorSettings />} />
+          </Route>
+
+          {/* Delivery Partner Routes */}
+          <Route element={<DashboardLayout variant="delivery" />}>
+            <Route path="/delivery" element={<DeliveryDashboard />} />
+            <Route path="/delivery/orders" element={<DeliveryOrders />} />
+            <Route path="/delivery/earnings" element={<DeliveryEarnings />} />
+            <Route path="/delivery/map" element={<DeliveryMap />} />
+            <Route path="/delivery/ratings" element={<DeliveryRatings />} />
+            <Route path="/delivery/settings" element={<DeliverySettings />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />

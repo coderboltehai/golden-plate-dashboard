@@ -22,12 +22,15 @@ import {
   Package,
   Star,
   MessageSquare,
+  Bike,
+  DollarSign,
+  Map,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
 interface DashboardSidebarProps {
-  variant: "admin" | "user" | "vendor";
+  variant: "admin" | "user" | "vendor" | "delivery";
   onClose: () => void;
 }
 
@@ -58,10 +61,20 @@ const vendorNavItems = [
   { label: "Settings", icon: Settings, href: "/vendor/settings" },
 ];
 
+const deliveryNavItems = [
+  { label: "Dashboard", icon: LayoutDashboard, href: "/delivery" },
+  { label: "My Deliveries", icon: Bike, href: "/delivery/orders" },
+  { label: "Earnings", icon: DollarSign, href: "/delivery/earnings" },
+  { label: "Live Map", icon: Map, href: "/delivery/map" },
+  { label: "Ratings", icon: Star, href: "/delivery/ratings" },
+  { label: "Settings", icon: Settings, href: "/delivery/settings" },
+];
+
 const navConfigs = {
   admin: { items: adminNavItems, title: "Admin Panel", subtitle: "Manage your platform" },
   user: { items: userNavItems, title: "My Account", subtitle: "Manage your profile" },
   vendor: { items: vendorNavItems, title: "Restaurant", subtitle: "Manage your business" },
+  delivery: { items: deliveryNavItems, title: "Delivery", subtitle: "Manage your deliveries" },
 };
 
 export function DashboardSidebar({ variant, onClose }: DashboardSidebarProps) {
@@ -69,7 +82,8 @@ export function DashboardSidebar({ variant, onClose }: DashboardSidebarProps) {
   const config = navConfigs[variant];
 
   const isActive = (href: string) => {
-    if (href === `/${variant === "user" ? "profile" : variant}`) {
+    const base = variant === "user" ? "profile" : variant;
+    if (href === `/${base}`) {
       return location.pathname === href;
     }
     return location.pathname.startsWith(href);
