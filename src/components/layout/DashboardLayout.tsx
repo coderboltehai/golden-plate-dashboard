@@ -7,7 +7,7 @@ import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface DashboardLayoutProps {
-  variant: "admin" | "user" | "vendor";
+  variant: "admin" | "user" | "vendor" | "delivery";
 }
 
 export function DashboardLayout({ variant }: DashboardLayoutProps) {
