@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { PublicLayout } from "@/components/layout/PublicLayout";
 
@@ -49,68 +49,78 @@ import DeliverySettings from "./pages/delivery/DeliverySettings";
 
 const queryClient = new QueryClient();
 
+const router = createBrowserRouter([
+  // Public Routes
+  {
+    element: <PublicLayout />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/auth", element: <Auth /> },
+      { path: "/about", element: <About /> },
+      { path: "/contact", element: <Contact /> },
+      { path: "/join", element: <Join /> },
+    ],
+  },
+  // Order Tracking (standalone)
+  { path: "/track/:orderId", element: <OrderTracking /> },
+  // Admin Routes
+  {
+    element: <DashboardLayout variant="admin" />,
+    children: [
+      { path: "/admin", element: <AdminDashboard /> },
+      { path: "/admin/users", element: <AdminUsers /> },
+      { path: "/admin/vendors", element: <AdminVendors /> },
+      { path: "/admin/orders", element: <AdminOrders /> },
+      { path: "/admin/analytics", element: <AdminAnalytics /> },
+      { path: "/admin/settings", element: <AdminSettings /> },
+    ],
+  },
+  // User Routes
+  {
+    element: <DashboardLayout variant="user" />,
+    children: [
+      { path: "/profile", element: <UserProfile /> },
+      { path: "/profile/orders", element: <UserOrders /> },
+      { path: "/profile/favorites", element: <UserFavorites /> },
+      { path: "/profile/addresses", element: <UserAddresses /> },
+      { path: "/profile/notifications", element: <UserNotifications /> },
+      { path: "/profile/settings", element: <UserSettings /> },
+    ],
+  },
+  // Vendor Routes
+  {
+    element: <DashboardLayout variant="vendor" />,
+    children: [
+      { path: "/vendor", element: <VendorDashboard /> },
+      { path: "/vendor/menu", element: <VendorMenu /> },
+      { path: "/vendor/orders", element: <VendorOrders /> },
+      { path: "/vendor/analytics", element: <VendorAnalytics /> },
+      { path: "/vendor/reviews", element: <VendorReviews /> },
+      { path: "/vendor/settings", element: <VendorSettings /> },
+    ],
+  },
+  // Delivery Partner Routes
+  {
+    element: <DashboardLayout variant="delivery" />,
+    children: [
+      { path: "/delivery", element: <DeliveryDashboard /> },
+      { path: "/delivery/orders", element: <DeliveryOrders /> },
+      { path: "/delivery/earnings", element: <DeliveryEarnings /> },
+      { path: "/delivery/map", element: <DeliveryMap /> },
+      { path: "/delivery/ratings", element: <DeliveryRatings /> },
+      { path: "/delivery/settings", element: <DeliverySettings /> },
+    ],
+  },
+  // 404
+  { path: "*", element: <NotFound /> },
+]);
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Routes>
-          {/* Public Routes */}
-          <Route element={<PublicLayout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/join" element={<Join />} />
-          </Route>
-
-          {/* Order Tracking (standalone) */}
-          <Route path="/track/:orderId" element={<OrderTracking />} />
-
-          {/* Admin Routes */}
-          <Route element={<DashboardLayout variant="admin" />}>
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/users" element={<AdminUsers />} />
-            <Route path="/admin/vendors" element={<AdminVendors />} />
-            <Route path="/admin/orders" element={<AdminOrders />} />
-            <Route path="/admin/analytics" element={<AdminAnalytics />} />
-            <Route path="/admin/settings" element={<AdminSettings />} />
-          </Route>
-
-          {/* User Routes */}
-          <Route element={<DashboardLayout variant="user" />}>
-            <Route path="/profile" element={<UserProfile />} />
-            <Route path="/profile/orders" element={<UserOrders />} />
-            <Route path="/profile/favorites" element={<UserFavorites />} />
-            <Route path="/profile/addresses" element={<UserAddresses />} />
-            <Route path="/profile/notifications" element={<UserNotifications />} />
-            <Route path="/profile/settings" element={<UserSettings />} />
-          </Route>
-
-          {/* Vendor Routes */}
-          <Route element={<DashboardLayout variant="vendor" />}>
-            <Route path="/vendor" element={<VendorDashboard />} />
-            <Route path="/vendor/menu" element={<VendorMenu />} />
-            <Route path="/vendor/orders" element={<VendorOrders />} />
-            <Route path="/vendor/analytics" element={<VendorAnalytics />} />
-            <Route path="/vendor/reviews" element={<VendorReviews />} />
-            <Route path="/vendor/settings" element={<VendorSettings />} />
-          </Route>
-
-          {/* Delivery Partner Routes */}
-          <Route element={<DashboardLayout variant="delivery" />}>
-            <Route path="/delivery" element={<DeliveryDashboard />} />
-            <Route path="/delivery/orders" element={<DeliveryOrders />} />
-            <Route path="/delivery/earnings" element={<DeliveryEarnings />} />
-            <Route path="/delivery/map" element={<DeliveryMap />} />
-            <Route path="/delivery/ratings" element={<DeliveryRatings />} />
-            <Route path="/delivery/settings" element={<DeliverySettings />} />
-          </Route>
-
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <RouterProvider router={router} />
     </TooltipProvider>
   </QueryClientProvider>
 );
