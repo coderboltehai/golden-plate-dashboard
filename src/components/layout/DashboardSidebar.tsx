@@ -8,7 +8,6 @@ import {
   ShoppingBag,
   Settings,
   BarChart3,
-  UtensilsCrossed,
   Heart,
   MapPin,
   Bell,
@@ -25,6 +24,7 @@ import {
   Bike,
   DollarSign,
   Map,
+  ChefHat,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -54,7 +54,7 @@ const userNavItems = [
 
 const vendorNavItems = [
   { label: "Dashboard", icon: LayoutDashboard, href: "/vendor" },
-  { label: "Menu", icon: UtensilsCrossed, href: "/vendor/menu" },
+  { label: "Menu", icon: ChefHat, href: "/vendor/menu" },
   { label: "Orders", icon: ClipboardList, href: "/vendor/orders" },
   { label: "Analytics", icon: TrendingUp, href: "/vendor/analytics" },
   { label: "Reviews", icon: Star, href: "/vendor/reviews" },
@@ -95,7 +95,7 @@ export function DashboardSidebar({ variant, onClose }: DashboardSidebarProps) {
       <div className="p-6 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-gradient-golden flex items-center justify-center shadow-golden">
-            <UtensilsCrossed className="w-5 h-5 text-primary-foreground" />
+            <Heart className="w-5 h-5 text-primary-foreground fill-primary-foreground" />
           </div>
           <div>
             <h2 className="font-bold text-sidebar-foreground text-lg">{config.title}</h2>

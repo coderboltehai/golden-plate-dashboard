@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { UtensilsCrossed, Menu, X } from "lucide-react";
+import { Heart, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
@@ -21,10 +21,10 @@ export function Navbar() {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5">
           <div className="w-9 h-9 rounded-lg bg-gradient-golden flex items-center justify-center shadow-golden">
-            <UtensilsCrossed className="w-5 h-5 text-primary-foreground" />
+            <Heart className="w-5 h-5 text-primary-foreground fill-primary-foreground" />
           </div>
           <span className="text-xl font-bold text-foreground">
-            Food<span className="text-gradient-golden">Hub</span>
+            Taste<span className="text-gradient-golden">Y</span>Heart
           </span>
         </Link>
 

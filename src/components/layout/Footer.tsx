@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { UtensilsCrossed, Facebook, Twitter, Instagram, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import { Heart, Facebook, Twitter, Instagram, Youtube, Mail, Phone, MapPin } from "lucide-react";
 
 const footerLinks = {
   Company: [
@@ -28,10 +28,10 @@ export function Footer() {
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-2.5 mb-4">
               <div className="w-9 h-9 rounded-lg bg-gradient-golden flex items-center justify-center">
-                <UtensilsCrossed className="w-5 h-5 text-primary-foreground" />
+                <Heart className="w-5 h-5 text-primary-foreground fill-primary-foreground" />
               </div>
               <span className="text-xl font-bold">
-                Food<span className="text-gradient-golden">Hub</span>
+                Taste<span className="text-gradient-golden">Y</span>Heart
               </span>
             </Link>
             <p className="text-sidebar-foreground/60 text-sm leading-relaxed mb-6 max-w-sm">
@@ -73,11 +73,11 @@ export function Footer() {
         {/* Contact row */}
         <div className="mt-12 pt-8 border-t border-sidebar-border flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-6 text-sm text-sidebar-foreground/60">
-            <span className="flex items-center gap-2"><Mail className="w-4 h-4" /> hello@foodhub.com</span>
+            <span className="flex items-center gap-2"><Mail className="w-4 h-4" /> hello@tasteyheart.com</span>
             <span className="flex items-center gap-2"><Phone className="w-4 h-4" /> +1 (555) 123-4567</span>
             <span className="flex items-center gap-2"><MapPin className="w-4 h-4" /> New York, USA</span>
           </div>
-          <p className="text-xs text-sidebar-foreground/40">© 2026 FoodHub. All rights reserved.</p>
+          <p className="text-xs text-sidebar-foreground/40">© 2026 TasteYHeart. All rights reserved.</p>
         </div>
       </div>
     </footer>
